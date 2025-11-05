@@ -9,6 +9,7 @@ use App\Http\Controllers\FertilizerDistributionController;
 use App\Http\Controllers\SeedDistributionController;
 use App\Http\Controllers\DistributionHistoryController;
 use App\Http\Controllers\InventoryManagementController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -44,6 +45,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('inventory', [InventoryManagementController::class, 'store'])->name('inventory.store');
     Route::post('inventory/restock', [InventoryManagementController::class, 'restock'])->name('inventory.restock');
     Route::post('inventory/adjust', [InventoryManagementController::class, 'adjust'])->name('inventory.adjust');
+
+    // Reports
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [ReportsController::class, 'index'])->name('index');
+        Route::get('/distribution', [ReportsController::class, 'distribution'])->name('distribution');
+        Route::get('/farmer', [ReportsController::class, 'farmer'])->name('farmer');
+        Route::get('/resource', [ReportsController::class, 'resource'])->name('resource');
+        Route::get('/compliance', [ReportsController::class, 'compliance'])->name('compliance');
+        Route::get('/{type}/pdf', [ReportsController::class, 'generatePdf'])->name('pdf');
+    });
 });
 
 require __DIR__.'/settings.php';

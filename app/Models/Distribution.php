@@ -42,8 +42,8 @@ class Distribution extends Model
         return $this->hasMany(DistributionHistory::class);
     }
 
-    public function inventoryTransaction(): BelongsTo
+    public function inventoryTransactions(): HasMany
     {
-        return $this->belongsTo(InventoryTransaction::class);
+        return $this->hasMany(InventoryTransaction::class);
     }
 }

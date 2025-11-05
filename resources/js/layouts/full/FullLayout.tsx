@@ -210,10 +210,10 @@ export default function FullLayout({ children }: FullLayoutProps) {
   ];
 
   const reportsSubItems = [
-    { text: 'Distribution Reports', icon: <AssessmentIcon /> },
-    { text: 'Farmer Statistics', icon: <BarChartIcon /> },
-    { text: 'Resource Utilization', icon: <TrendingUpIcon /> },
-    { text: 'Compliance Reports', icon: <CheckCircleIcon /> },
+    { text: 'Distribution Reports', icon: <AssessmentIcon />, href: '/reports/distribution' },
+    { text: 'Farmer Statistics', icon: <BarChartIcon />, href: '/reports/farmer' },
+    { text: 'Resource Utilization', icon: <TrendingUpIcon />, href: '/reports/resource' },
+    { text: 'Compliance Reports', icon: <CheckCircleIcon />, href: '/reports/compliance' },
   ];
 
   const bottomMenuItems = [
@@ -233,27 +233,21 @@ export default function FullLayout({ children }: FullLayoutProps) {
         }}
       >
         <Toolbar sx={{ minHeight: '64px', py: 1, position: 'relative' }}>
-        {/* <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 600 }}>
-            AgriCord Dashboard
-          </Typography> */}
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center',
-            cursor: 'pointer',
-            transition: 'transform 0.2s ease-in-out',
-            position: 'absolute',
-            left: '32px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            '&:hover': {
-              transform: 'translateY(-50%) scale(1.05)'
-            }
-          }}>
+          <Box
+            sx={{
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-1px) scale(1.02)'
+              }
+            }}
+            onClick={() => router.get('/dashboard')}
+          >
             <img 
               src="/images/logo.png" 
               alt="AgriCord Logo" 
               style={{ 
-                height: '190px', 
+                height: '40px', 
                 width: 'auto',
                 objectFit: 'contain',
                 filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
@@ -836,7 +830,12 @@ export default function FullLayout({ children }: FullLayoutProps) {
                     arrow
                   >
                     <ListItem 
-                      onClick={() => handleMenuClick('Reports', subItem.text)}
+                      onClick={() => {
+                        handleMenuClick('Reports', subItem.text);
+                        if (subItem.href) {
+                          router.get(subItem.href);
+                        }
+                      }}
                       sx={{ 
                         pl: isSidebarOpen ? 6 : 2, 
                         py: 0.5,

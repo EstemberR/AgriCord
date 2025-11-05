@@ -44,6 +44,9 @@ import {
   History as HistoryIcon,
   Add as AddIcon,
   MoreVert as MoreVertIcon,
+  Cancel as CancelIcon,
+  People as PeopleIcon,
+  CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
 import AddFarmerModal from '@/components/farmers/AddFarmerModal';
 
@@ -321,7 +324,7 @@ export default function FarmerRegistration({ farmers = [], stats }: FarmerRegist
     }
   };
 
-  const handleExport = (format: 'excel' | 'pdf') => {
+  const handleExport = () => {
     // Get the farmers to export (either selected or all filtered)
     const farmersToExport = selected.length > 0 
       ? sortedFarmers.filter(f => selected.includes(f.id))
@@ -360,7 +363,34 @@ export default function FarmerRegistration({ farmers = [], stats }: FarmerRegist
     link.click();
     document.body.removeChild(link);
 
-    console.log(`Exported ${farmersToExport.length} farmers to ${format}`);
+    console.log(`Exported ${farmersToExport.length} farmers to Excel`);
+  };
+
+  const handleExportPDF = () => {
+    const farmersToExport = selected.length > 0 
+      ? sortedFarmers.filter(f => selected.includes(f.id))
+      : sortedFarmers;
+
+    // Send request to backend to generate PDF
+    router.post('/farmers/export-pdf', {
+      farmers: farmersToExport
+    }, {
+      onSuccess: (response) => {
+        // The backend should return a URL to download the PDF
+        const link = document.createElement('a');
+        link.href = response.url;
+        link.download = `farmers_report_${new Date().toISOString().split('T')[0]}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      },
+      onError: (errors) => {
+        console.error('PDF export error:', errors);
+        alert('Failed to export PDF. Please try again.');
+      },
+    });
+
+    console.log(`Exporting ${farmersToExport.length} farmers to PDF`);
   };
 
   const handleBulkDelete = () => {
@@ -412,36 +442,90 @@ export default function FarmerRegistration({ farmers = [], stats }: FarmerRegist
 
         {/* Summary Statistics */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 2, mb: 3 }}>
-          <Card sx={{ bgcolor: '#000080', color: 'white', boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'white', mb: 1 }}>
+          {/* Total Farmers Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <PeopleIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Registered Farmers
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
                 {statistics.total}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>Total Registered Farmers</Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                All Time
+              </Typography>
             </CardContent>
           </Card>
-          <Card sx={{ bgcolor: '#013220', color: 'white', boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'white', mb: 1 }}>
+
+          {/* Active Farmers Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <CheckCircleIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Active Farmers
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
                 {statistics.active}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>Active Farmers</Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(0, 255, 0, 0.1)', color: '#4CAF50', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Active
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Currently Registered
+                </Typography>
+              </Box>
             </CardContent>
           </Card>
-          <Card sx={{ bgcolor: '#F59E0B', color: 'white', boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'white', mb: 1 }}>
+
+          {/* New Farmers Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <AddIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                New This Month
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
                 {statistics.newThisMonth}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>New This Month</Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(255, 152, 0, 0.1)', color: '#F59E0B', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  New
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Recent Registrations
+                </Typography>
+              </Box>
             </CardContent>
           </Card>
-          <Card sx={{ bgcolor: '#64748B', color: 'white', boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'white', mb: 1 }}>
+
+          {/* Inactive Farmers Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <CancelIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Inactive Farmers
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
                 {statistics.inactive}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'white', fontWeight: 500 }}>Inactive Farmers</Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)', color: '#f44336', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Inactive
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Not Active
+                </Typography>
+              </Box>
             </CardContent>
           </Card>
         </Box>
@@ -535,14 +619,15 @@ export default function FarmerRegistration({ farmers = [], stats }: FarmerRegist
               <Button
                 variant="contained"
                 startIcon={<GetAppIcon />}
-                onClick={() => handleExport('excel')}
-              >
-                Export to Excel
-              </Button>
-              <Button
-                variant="contained"
-                startIcon={<GetAppIcon />}
-                onClick={() => handleExport('pdf')}
+                onClick={handleExportPDF}
+                sx={{ 
+                  bgcolor: '#103550',
+                  '&:hover': {
+                    bgcolor: '#103550',
+                    transform: 'scale(1.05)',
+                    boxShadow: '0 6px 20px rgba(255, 255, 255, 0.1)',
+                  }
+                }}
               >
                 Export to PDF
               </Button>
@@ -566,7 +651,7 @@ export default function FarmerRegistration({ farmers = [], stats }: FarmerRegist
                 <Button 
                   variant="outlined" 
                   size="small" 
-                  onClick={() => handleExport('excel')}
+                  onClick={handleExport}
                   sx={{ 
                     borderColor: '#1e3a8a',
                     color: '#ffffff',

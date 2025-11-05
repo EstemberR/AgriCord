@@ -176,15 +176,46 @@ function UsersPage({ statistics, farmers, admins }: UsersPageProps) {
         }}>
           {/* Farmers Card */}
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #667eea 10%, #131e3A 100%)',
-            color: 'white',
-            boxShadow: 3,
+            bgcolor: '#1e293b',
+            color: 'common.white',
+            borderRadius: 2,
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            border: '1px solid',
+            borderColor: 'divider',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+            }
           }}>
-            <CardContent sx={{ py: 3 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <GroupsIcon sx={{ fontSize: 20, mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1rem' }}>
-                    Farmers
+            <CardContent sx={{ p: 2.5 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                mb: 2,
+                gap: 1.5
+              }}>
+                <Box sx={{ 
+                  bgcolor: 'rgba(255,255,255,0.1)', 
+                  borderRadius: 2, 
+                  p: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <PeopleIcon sx={{ fontSize: 28 }} />
+                </Box>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600,
+                  fontSize: '1.1rem',
+                  color: 'common.white'
+                }}>
+                  System Users
                   </Typography>
                 </Box>
                 <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
@@ -211,15 +242,46 @@ function UsersPage({ statistics, farmers, admins }: UsersPageProps) {
 
           {/* Admin Users Card */}
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #FFA500 0%, #f5576c 100%)',
-            color: 'white',
-            boxShadow: 3,
+            bgcolor: '#1e293b',
+            color: 'common.white',
+            borderRadius: 2,
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            border: '1px solid',
+            borderColor: 'divider',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+            }
           }}>
-            <CardContent sx={{ py: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <AdminPanelSettingsIcon sx={{ fontSize: 32, mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1rem' }}>
-                    Admin Users
+            <CardContent sx={{ p: 2.5 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                mb: 2,
+                gap: 1.5
+              }}>
+                <Box sx={{ 
+                  bgcolor: 'rgba(255,255,255,0.1)', 
+                  borderRadius: 2, 
+                  p: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <AdminPanelSettingsIcon sx={{ fontSize: 28 }} />
+                </Box>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600,
+                  fontSize: '1.1rem',
+                  color: 'common.white'
+                }}>
+                  Admin Users
                   </Typography>
                 </Box>
                 <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
@@ -246,15 +308,46 @@ function UsersPage({ statistics, farmers, admins }: UsersPageProps) {
 
           {/* Total Users Card */}
           <Card sx={{ 
-            background: 'linear-gradient(135deg, #131e3A 0%, #00f1fe 100%)',
-            color: 'white',
-            boxShadow: 3,
+            bgcolor: '#1e293b',
+            color: 'common.white',
+            borderRadius: 2,
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            border: '1px solid',
+            borderColor: 'divider',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+            }
           }}>
-            <CardContent sx={{ py: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <PeopleIcon sx={{ fontSize: 32, mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1rem' }}>
-                    Total Users
+            <CardContent sx={{ p: 2.5 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                mb: 2,
+                gap: 1.5
+              }}>
+                <Box sx={{ 
+                  bgcolor: 'rgba(255,255,255,0.1)', 
+                  borderRadius: 2, 
+                  p: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <TrendingUpIcon sx={{ fontSize: 28 }} />
+                </Box>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600,
+                  fontSize: '1.1rem',
+                  color: 'common.white'
+                }}>
+                  Total Users
                   </Typography>
                 </Box>
                 <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
@@ -282,6 +375,7 @@ function UsersPage({ statistics, farmers, admins }: UsersPageProps) {
                   fontSize: '1rem',
                   textTransform: 'none',
                   minHeight: 64,
+                  color: '#ffffff'
                 },
               }}
             >

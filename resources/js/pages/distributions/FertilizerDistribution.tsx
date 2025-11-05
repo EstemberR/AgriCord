@@ -21,7 +21,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableSortLabel,
   TextField,
   Select,
   MenuItem,
@@ -36,7 +35,7 @@ import {
   InputAdornment,
   Alert,
   Tooltip,
-  CircularProgress,
+  Dialog,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -396,183 +395,89 @@ function FertilizerDistribution() {
         </Box>
 
         {/* Summary Cards */}
-        <Grid container spacing={9} sx={{ mb: 3 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#000080',
-                color: 'white',
-                height: '100%',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(0, 0, 128, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(0, 0, 128, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      This Month
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.totalDistributionsThisMonth}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Total Distributions
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <ScienceIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 2, mb: 3 }}>
+          {/* Total Distributions Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <ScienceIcon sx={{ fontSize: 28, color: '#000080' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Distributions
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalDistributionsThisMonth}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                This Month
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#013220',
-                color: 'white',
-                height: '100%',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(240, 147, 251, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(240, 147, 251, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Total Distributed
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.totalFertilizerDistributed}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Kilograms
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <CheckCircleIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Total Distributed Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <CheckCircleIcon sx={{ fontSize: 28, color: '#006400' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Distributed
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalFertilizerDistributed}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                Kilograms
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#ffa726',
-                color: 'white',
-                height: '100%',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(255, 167, 38, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(255, 167, 38, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Low Stock Alert
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.lowStockItems}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Items Need Restock
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <WarningIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Low Stock Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <WarningIcon sx={{ fontSize: 28, color: '#FFA500' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Low Stock Alert
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.lowStockItems}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(255, 152, 0, 0.1)', color: '#F59E0B', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Warning
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Need Restock
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#64748B',
-                color: 'white',
-                height: '100%',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(38, 198, 218, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(38, 198, 218, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Pending
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.pendingDistributions}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Awaiting Completion
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <ScheduleIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+          {/* Pending Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <ScheduleIcon sx={{ fontSize: 28, color: '#808080' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Pending
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.pendingDistributions}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)', color: '#f44336', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Awaiting
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  To be Completed
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
 
         {/* Filters */}
         <Card sx={{ 
@@ -582,9 +487,9 @@ function FertilizerDistribution() {
           borderRadius: 2, 
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)' 
         }}>
-          <CardContent sx={{ p: 2.5 }}>
-            <Grid container spacing={5}>
-              <Grid item xs={12} sm={6} md={1.8}>
+          <CardContent sx={{ p: 2 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={4} md={1}>
                 <TextField
                   fullWidth
                   size="small"
@@ -620,7 +525,7 @@ function FertilizerDistribution() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={1.8}>
+              <Grid item xs={12} sm={4} md={1}>
                 <TextField
                   fullWidth
                   size="small"
@@ -656,9 +561,8 @@ function FertilizerDistribution() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={2}>
-                <TextField
-                  fullWidth
+              <Grid item xs={12} md="auto">
+                <TextField 
                   size="small"
                   placeholder="Search farmer name or ID..."
                   value={searchTerm}
@@ -894,7 +798,18 @@ function FertilizerDistribution() {
         </Card>
 
         {/* Add Distribution Modal */}
-        <Modal open={openModal} onClose={handleCloseModal}>
+        <Dialog 
+          open={openModal} 
+          onClose={handleCloseModal}
+          maxWidth="md"
+          fullWidth
+          sx={{
+            '& .MuiBackdrop-root': {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(4px)',
+            },
+          }}
+        >
           <Box
             sx={{
               position: 'absolute',
@@ -904,190 +819,335 @@ function FertilizerDistribution() {
               width: { xs: '90%', sm: 600 },
               maxHeight: '90vh',
               overflow: 'auto',
-              bgcolor: 'background.paper',
+              bgcolor: '#1e293b',
               borderRadius: 2,
-              boxShadow: 24,
-              p: 4,
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+              border: '1px solid rgba(255,255,255,0.1)',
             }}
           >
-            <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
-              Add Fertilizer Distribution
-            </Typography>
+            <Box
+              sx={{
+                p: 3,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              <Box
+                sx={{
+                  bgcolor: 'rgba(255,255,255,0.1)',
+                  borderRadius: 1.5,
+                  p: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography sx={{ fontSize: '1.5rem' }}>🌿</Typography>
+              </Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'white',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                }}
+              >
+                Add Fertilizer Distribution
+              </Typography>
+              <IconButton
+                onClick={handleCloseModal}
+                sx={{
+                  ml: 'auto',
+                  color: 'white',
+                  '&:hover': {
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    transform: 'rotate(90deg)',
+                    transition: 'all 0.2s ease-in-out',
+                  },
+                }}
+              >
+                <CancelIcon />
+              </IconButton>
+            </Box>
 
-            {stockWarning && (
-              <Alert severity={stockWarning.includes('❌') ? 'error' : stockWarning.includes('⚠️') ? 'warning' : 'info'} sx={{ mb: 2 }}>
-                {stockWarning}
-              </Alert>
-            )}
+            <Box sx={{ p: 3, color: 'white' }}>
+              {stockWarning && (
+                <Alert severity={stockWarning.includes('❌') ? 'error' : stockWarning.includes('⚠️') ? 'warning' : 'info'} sx={{ mb: 2 }}>
+                  {stockWarning}
+                </Alert>
+              )}
 
-            <Grid container spacing={3}>
-              {/* First row - Farmer and Fertilizer Product */}
-              <Grid item xs={12} sm={6}>
-                <Autocomplete
-                  options={farmers}
-                  getOptionLabel={(option) => `${option.name} (${option.barangay})`}
-                  value={farmers.find(f => f.id === formData.farmer_id) || null}
-                  onChange={(_e, value) => setFormData({ ...formData, farmer_id: value?.id || null })}
-                  renderInput={(params) => (
-                    <TextField 
-                      {...params} 
-                      label="Select Beneficiary Farmer" 
-                      placeholder="Search farmer by name or barangay"
-                      required
-                      fullWidth
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <Autocomplete
+                    options={farmers}
+                    getOptionLabel={(option) => `${option.name} (${option.barangay})`}
+                    value={farmers.find(f => f.id === formData.farmer_id) || null}
+                    onChange={(_e, value) => setFormData({ ...formData, farmer_id: value?.id || null })}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Select Beneficiary Farmer"
+                        placeholder="Search farmer by name or barangay"
+                        required
+                        fullWidth
+                        sx={{
+                          '& .MuiInputBase-input': {
+                            color: 'white',
+                            fontSize: '0.875rem',
+                          },
+                          '& .MuiInputLabel-root': {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                          },
+                          '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#667eea',
+                          },
+                          '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                              borderColor: 'rgba(255, 255, 255, 0.3)',
+                            },
+                            '&:hover fieldset': {
+                              borderColor: 'rgba(255, 255, 255, 0.5)',
+                            },
+                            '&.Mui-focused fieldset': {
+                              borderColor: '#667eea',
+                            },
+                          },
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth required>
+                    <InputLabel sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      Fertilizer Product
+                    </InputLabel>
+                    <Select
+                      value={formData.fertilizer_type}
+                      label="Fertilizer Product"
+                      onChange={(e) => handleFertilizerTypeChange(e.target.value)}
                       sx={{
-                        '& .MuiInputBase-input': {
-                          fontSize: '0.875rem',
+                        color: 'white',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
                         },
-                        '& .MuiInputBase-input::placeholder': {
-                          color: 'text.secondary',
-                          opacity: 0.7
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
                         },
-                        '& .MuiAutocomplete-input': {
-                          padding: '0.5rem !important',
-                          minWidth: '450px !important'
-                        }
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#667eea',
+                        },
+                        '& .MuiSvgIcon-root': {
+                          color: 'white',
+                        },
                       }}
-                    />
-                  )}
-                />
+                    >
+                      {fertilizerInventory.map((item) => (
+                        <MenuItem key={item.id} value={item.name}>
+                          {item.name} • Stock: {item.current_stock} {item.unit}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <TextField
+                    fullWidth
+                    label="Date of Distribution"
+                    type="date"
+                    value={formData.distribution_date}
+                    onChange={(e) => setFormData({ ...formData, distribution_date: e.target.value })}
+                    required
+                    InputLabelProps={{ shrink: true }}
+                    sx={{
+                      '& .MuiInputBase-root': {
+                        color: 'white',
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#667eea',
+                        },
+                      },
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <FormControl fullWidth required>
+                    <InputLabel sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      Distribution Status
+                    </InputLabel>
+                    <Select
+                      value={formData.status}
+                      label="Distribution Status"
+                      onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                      sx={{
+                        color: 'white',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
+                        },
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#667eea',
+                        },
+                        '& .MuiSvgIcon-root': {
+                          color: 'white',
+                        },
+                      }}
+                    >
+                      <MenuItem value="completed">Completed</MenuItem>
+                      <MenuItem value="pending">Pending</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <FormControl fullWidth required>
+                    <InputLabel sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      Unit of Measure
+                    </InputLabel>
+                    <Select
+                      value={formData.unit}
+                      label="Unit of Measure"
+                      onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
+                      sx={{
+                        color: 'white',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
+                        },
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#667eea',
+                        },
+                        '& .MuiSvgIcon-root': {
+                          color: 'white',
+                        },
+                      }}
+                    >
+                      <MenuItem value="kg">Kilograms (kg)</MenuItem>
+                      <MenuItem value="bags">Bags</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Distribution Amount"
+                    type="number"
+                    value={formData.quantity}
+                    onChange={(e) => handleQuantityChange(e.target.value)}
+                    placeholder="Enter amount"
+                    required
+                    inputProps={{ min: 0, step: 0.01 }}
+                    sx={{
+                      '& .MuiInputBase-input': {
+                        color: 'white',
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#667eea',
+                        },
+                      },
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Additional Notes"
+                    multiline
+                    rows={3}
+                    value={formData.notes}
+                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                    placeholder="Enter any additional information or remarks about this distribution"
+                    helperText="Optional: Add any relevant details about the distribution"
+                    sx={{
+                      '& .MuiInputBase-input': {
+                        color: 'white',
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.3)',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: 'rgba(255, 255, 255, 0.5)',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#667eea',
+                        },
+                      },
+                      '& .MuiFormHelperText-root': {
+                        color: 'rgba(255, 255, 255, 0.5)',
+                      },
+                    }}
+                  />
+                </Grid>
               </Grid>
 
-              <Grid item xs={12} sm={6}>
-                <FormControl 
-                  fullWidth 
-                  required
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}>
+                <Button
+                  onClick={handleCloseModal}
+                  variant="outlined"
+                  disabled={isSubmitting}
                   sx={{
-                    '& .MuiSelect-select': {
-                      fontSize: '0.875rem',
-                      padding: '0.75rem'
+                    borderColor: 'rgba(255,255,255,0.3)',
+                    color: 'white',
+                    '&:hover': {
+                      borderColor: 'rgba(255,255,255,0.5)',
                     },
-                    '& .MuiSelect-outlined': {
-                      minWidth: '250px'
-                    }
                   }}
                 >
-                  <InputLabel>Fertilizer Product</InputLabel>
-                  <Select
-                    value={formData.fertilizer_type}
-                    label="Fertilizer Product"
-                    onChange={(e) => handleFertilizerTypeChange(e.target.value)}
-                    placeholder="Select fertilizer type"
-                  >
-                    {fertilizerInventory.map((item) => (
-                      <MenuItem key={item.id} value={item.name}>
-                        {item.name} • Stock: {item.current_stock} {item.unit}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              {/* Second row - Date, Status, and Unit */}
-              <Grid item xs={12} sm={4}>
-                <TextField
-                  fullWidth
-                  label="Date of Distribution"
-                  type="date"
-                  value={formData.distribution_date}
-                  onChange={(e) => setFormData({ ...formData, distribution_date: e.target.value })}
-                  required
-                  InputLabelProps={{ shrink: true }}
-                    sx={{
-                    '& .MuiSelect-select': {
-                      fontSize: '0.875rem',
-                      padding: '0.80rem'
-                    },
-                    '& .MuiSelect-outlined': {
-                      minWidth: '300px'
-                    }
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-                <FormControl fullWidth required>
-                  <InputLabel>Distribution Status</InputLabel>
-                  <Select
-                    value={formData.status}
-                    label="Distribution Status"
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  >
-                    <MenuItem value="completed">Completed</MenuItem>
-                    <MenuItem value="pending">Pending</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-                <FormControl fullWidth required>
-                  <InputLabel>Unit of Measure</InputLabel>
-                  <Select
-                    value={formData.unit}
-                    label="Unit of Measure"
-                    onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-                  >
-                    <MenuItem value="kg">Kilograms (kg)</MenuItem>
-                    <MenuItem value="bags">Bags</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              {/* Third row - Distribution Amount */}
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Distribution Amount"
-                  type="number"
-                  value={formData.quantity}
-                  onChange={(e) => handleQuantityChange(e.target.value)}
-                  placeholder="Enter amount"
-                  required
-                  inputProps={{ 
-                    min: 0, 
-                    step: 0.01,
-                    'aria-label': 'Distribution amount' 
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Additional Notes"
-                  multiline
-                  rows={3}
-                  value={formData.notes}
-                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Enter any additional information or remarks about this distribution"
-                  helperText="Optional: Add any relevant details about the distribution"
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  disabled={isSubmitting}
                   sx={{
-                    '& .MuiInputBase-input::placeholder': {
-                      fontSize: '0.875rem',
-                      width: '100%',
-                      color: 'text.secondary',
-                      opacity: 0.7
-                    }
+                    bgcolor: '#667eea',
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: '#5a6fd6',
+                    },
                   }}
-                />
-              </Grid>
-            </Grid>
-
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}>
-              <Button onClick={handleCloseModal} variant="outlined" disabled={isSubmitting}>
-                Cancel
-              </Button>
-              <Button 
-                onClick={handleSubmit} 
-                variant="contained" 
-                color="primary"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Saving...' : 'Save Distribution'}
-              </Button>
+                >
+                  {isSubmitting ? 'Saving...' : 'Save Distribution'}
+                </Button>
+              </Box>
             </Box>
           </Box>
-        </Modal>
+        </Dialog>
 
         {/* Edit Distribution Modal */}
         <Modal open={editModalOpen} onClose={handleCloseModal}>

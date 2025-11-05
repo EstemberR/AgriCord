@@ -171,90 +171,94 @@ export default function DistributionHistory({ distributions, statistics }: Histo
         </Box>
 
         {/* Summary Cards */}
-        <Grid container spacing={3} sx={{ mb: 3 }}>
-          <Grid item xs={12} sm={6} lg={3}>
-            <Card sx={{ bgcolor: '#000080', color: 'white', height: '100%', borderRadius: 2 }}>
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem' }}>
-                      Total Distributions
-                    </Typography>
-                    <Typography variant="h4" sx={{ mb: 0.5, fontWeight: 700 }}>
-                      {statistics.totalDistributions}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ bgcolor: 'rgba(255,255,255,0.2)', p: 1, borderRadius: 2 }}>
-                    <HistoryIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 2, mb: 3 }}>
+          {/* Total Distributions Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <HistoryIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Distributions
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalDistributions}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                Overall
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} lg={3}>
-            <Card sx={{ bgcolor: '#013220', color: 'white', height: '100%', borderRadius: 2 }}>
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem' }}>
-                      Total Fertilizer
-                    </Typography>
-                    <Typography variant="h4" sx={{ mb: 0.5, fontWeight: 700 }}>
-                      {statistics.totalFertilizerDistributed}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>Kilograms</Typography>
-                  </Box>
-                  <Box sx={{ bgcolor: 'rgba(255,255,255,0.2)', p: 1, borderRadius: 2 }}>
-                    <ScienceIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Total Fertilizer Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <ScienceIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Fertilizer
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalFertilizerDistributed}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(1, 50, 32, 0.1)', color: '#013220', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Fertilizer
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Kilograms
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} lg={3}>
-            <Card sx={{ bgcolor: '#ffa726', color: 'white', height: '100%', borderRadius: 2 }}>
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem' }}>
-                      Total Seeds
-                    </Typography>
-                    <Typography variant="h4" sx={{ mb: 0.5, fontWeight: 700 }}>
-                      {statistics.totalSeedsDistributed}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>Kilograms</Typography>
-                  </Box>
-                  <Box sx={{ bgcolor: 'rgba(255,255,255,0.2)', p: 1, borderRadius: 2 }}>
-                    <LocalShippingIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Total Seeds Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <LocalShippingIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Seeds
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalSeedsDistributed}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(245, 158, 11, 0.1)', color: '#F59E0B', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  Seed
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Kilograms
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} lg={3}>
-            <Card sx={{ bgcolor: '#64748B', color: 'white', height: '100%', borderRadius: 2 }}>
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem' }}>
-                      This Month
-                    </Typography>
-                    <Typography variant="h4" sx={{ mb: 0.5, fontWeight: 700 }}>
-                      {statistics.thisMonthDistributions}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>New Distributions</Typography>
-                  </Box>
-                  <Box sx={{ bgcolor: 'rgba(255,255,255,0.2)', p: 1, borderRadius: 2 }}>
-                    <CheckCircleIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+          {/* This Month Card */}
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <CheckCircleIcon sx={{ fontSize: 28 }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                This Month
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.thisMonthDistributions}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="caption" sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)', color: '#f44336', px: 1, py: 0.25, borderRadius: 1, fontWeight: 600 }}>
+                  New
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  Distributions
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
 
         {/* Filters */}
         <Card sx={{ mb: 3, bgcolor: '#2C3E50', color: 'white', borderRadius: 2 }}>

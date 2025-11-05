@@ -49,7 +49,12 @@ import {
   Warning as WarningIcon,
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
+  Savings as SavingsIcon,
+  Inventory as InventoryIcon2,
+  Warning as WarningIcon2,
+  LocalShipping as LocalShippingIcon,
 } from '@mui/icons-material';
+import StatisticsCard from '@/components/cards/StatisticsCard';
 
 interface InventoryItem {
   id: number;
@@ -290,212 +295,96 @@ function InventoryManagement() {
         </Box>
 
         {/* Summary Cards */}
-        <Grid container spacing={9} sx={{ mb: 3 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#000080',
-                color: 'white',
-                height: '120px',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(0, 0, 128, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(0, 0, 128, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Total Items
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.totalItems}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      In Stock
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <InventoryIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 2, mb: 3 }}>
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <InventoryIcon2 sx={{ fontSize: 28, color: '#000080' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Items
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.totalItems}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                In Stock
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#013220',
-                color: 'white',
-                height: '120px',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(240, 147, 251, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(240, 147, 251, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Low Stock
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.lowStockItems}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Items Below Threshold
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <WarningIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <WarningIcon2 sx={{ fontSize: 28, color: '#006400' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Low Stock
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.lowStockItems}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                Items Below Threshold
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#ffa726',
-                color: 'white',
-                height: '120px',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(255, 167, 38, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(255, 167, 38, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Out of Stock
-                    </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {statistics.outOfStockItems}
-                    </Typography>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Items Need Immediate Restock
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <CancelIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <CancelIcon sx={{ fontSize: 28, color: '#FFA500' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Out of Stock
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                {statistics.outOfStockItems}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                Items Need Restock
+              </Typography>
+            </CardContent>
+          </Card>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                bgcolor: '#64748B',
-                color: 'white',
-                height: '120px',
-                width: '210px',
-                borderRadius: 2,
-                boxShadow: '0 2px 8px rgba(38, 198, 218, 0.15)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 16px rgba(38, 198, 218, 0.25)',
-                }
-              }}
-            >
-              <CardContent sx={{ p: 2.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Box sx={{ flex: 1, minWidth: 0 }}>
-                    <Typography variant="body2" sx={{ opacity: 0.9, mb: 1, fontSize: '0.8rem', fontWeight: 500 }}>
-                      Total Value
-                    </Typography>
-                    <Tooltip title={`₱${statistics.totalValue}`} placement="top">
-                      <Typography 
-                        variant="h3" 
-                        sx={{ 
-                          fontWeight: 700, 
-                          mb: 0.5,
-                          fontSize: {
-                            xs: statistics.totalValue.length > 8 ? '1.5rem' : '1.8rem',
-                            sm: statistics.totalValue.length > 8 ? '1.8rem' : '2.125rem'
-                          },
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          maxWidth: '100%',
-                          cursor: 'help'
-                        }}
-                      >
-                        ₱{statistics.totalValue}
-                      </Typography>
-                    </Tooltip>
-                    <Typography variant="caption" sx={{ opacity: 0.85, fontSize: '0.75rem' }}>
-                      Inventory Worth
-                    </Typography>
-                  </Box>
-                  <Box sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.2)', 
-                    borderRadius: 2, 
-                    p: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    ml: 2,
-                    flexShrink: 0
-                  }}>
-                    <CheckCircleIcon sx={{ fontSize: 20 }} />
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+          <Card sx={{ bgcolor: '#1e293b', color: 'white', maxHeight: 130, borderRadius: 2, boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}>
+            <CardContent sx={{ p: 2.5, position: 'relative' }}>
+              <Box sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2, p: 1 }}>
+                <SavingsIcon sx={{ fontSize: 28, color: '#808080' }} />
+              </Box>
+              <Typography variant="subtitle2" sx={{ opacity: 0.9, mb: 0.5, fontWeight: 600 }}>
+                Total Value
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.25 }}>
+                ₱{statistics.totalValue}
+              </Typography>
+              <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                Inventory Worth
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
 
         {/* Low Stock Alerts */}
         {lowStockAlerts.length > 0 && (
-          <Alert severity="warning" sx={{ mb: 3 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
+          <Alert 
+            severity="warning" 
+            sx={{ 
+              mb: 2,
+              bgcolor: (theme) => theme.palette.warning.main,
+              color: 'white',
+              '& .MuiAlert-icon': { 
+                color: 'white',
+                opacity: 0.9
+              }
+            }}
+          >
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
               Low Stock Alerts ({lowStockAlerts.length})
             </Typography>
             {lowStockAlerts.slice(0, 3).map((alert) => (
               <Box key={alert.id} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 0.5, gap: 2 }}>
-                <Typography variant="body2" sx={{ flex: 1 }}>
+                <Typography variant="body2" sx={{ flex: 1, fontWeight: 500 }}>
                   {getStatusIcon(alert.status)} <strong>{alert.item_name}</strong>: {alert.current_stock} {alert.unit} 
                   (Min: {alert.minimum_threshold} {alert.unit})
                 </Typography>
@@ -506,7 +395,15 @@ function InventoryManagement() {
                     const item = inventory.find(i => i.id === alert.id);
                     if (item) handleOpenModal('restock', item);
                   }}
-                  sx={{ ml: 2 }}
+                  sx={{ 
+                    ml: 2,
+                    bgcolor: 'white',
+                    color: (theme) => theme.palette.warning.main,
+                    fontWeight: 600,
+                    '&:hover': {
+                      bgcolor: 'rgba(255, 255, 255, 0.9)',
+                    }
+                  }}
                 >
                   Restock Now
                 </Button>
@@ -522,7 +419,7 @@ function InventoryManagement() {
           color: 'white',
           borderRadius: 2,
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          width: '50%'
+          width: '55%'
         }}>
           <CardContent sx={{ p: 2.5 }}>
             <Grid container spacing={2}>

@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography, Button } from '@mui/material';
+import { Box, Container, Typography, Button } from '@mui/material';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Ziggy } from '../ziggy.js';
@@ -28,19 +28,25 @@ export default function Welcome() {
     return (
         <>
             <Head title="Welcome to AgriCord" />
-            <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ 
+                bgcolor: '#0a0a0a', 
+                minHeight: '100vh', 
+                display: 'flex', 
+                flexDirection: 'column',
+                color: 'common.white'
+            }}>
                 {/* Header */}
                 <Container maxWidth="lg">
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: 2, gap: 2, pr: -1 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: 2, gap: 2 }}>
                         {auth.user ? (
                             <Button
                                 component={Link}
                                 href={route('dashboard')}
                                 variant="contained"
                                 sx={{
-                                    bgcolor: '#396031',
+                                    bgcolor: 'primary.main',
                                     '&:hover': {
-                                        bgcolor: '#2b4725'
+                                        bgcolor: 'primary.dark'
                                     }
                                 }}
                             >
@@ -51,11 +57,11 @@ export default function Welcome() {
                                 <Button
                                     component={Link}
                                     href={route('login')}
-                                    // variant="outlined"
-                                    color="inherit"
+                                    variant="contained"
+                                    color="primary"
                                     sx={{
+                                        borderColor: 'primary.main',
                                         color: 'white',
-                                        borderColor: 'white',
                                         '&:hover': {
                                             borderColor: 'white',
                                             backgroundColor: 'rgba(255, 255, 255, 0.1)'
@@ -98,15 +104,18 @@ export default function Welcome() {
                             left: 0,
                             right: 0,
                             bottom: 0,
-                            backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark overlay
+                            backgroundColor: 'rgba(0, 0, 0, 0.50)', // Darker overlay for better contrast
                             zIndex: 1
                         },
-                        backgroundImage: 'url("/images/corn-bg.jpg")', // Replace with your image
+                        backgroundImage: 'url("/images/corn-bg.jpg")',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        minHeight: '500px', // Adjust this value as needed
+                        minHeight: '600px',
                         display: 'flex',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        borderRadius: '16px',
+                        mx: 2,
+                        boxShadow: 3
                     }}
                 >
                     <Container 
@@ -116,10 +125,27 @@ export default function Welcome() {
                             zIndex: 2 // This ensures content appears above the dark overlay
                         }}
                     >
-                        <Typography variant="h2" component="h1" sx={{ mb: 4, fontWeight: 700 }}>
+                        <Typography 
+                            variant="h2" 
+                            component="h1" 
+                            sx={{ 
+                                mb: 4, 
+                                fontWeight: 700,
+                                color: 'common.white',
+                                textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+                            }}
+                        >
                             Welcome to AgriCord
                         </Typography>
-                        <Typography variant="h5" sx={{ mb: 4, maxWidth: 'md' }}>
+                        <Typography 
+                            variant="h5" 
+                            sx={{ 
+                                mb: 4, 
+                                maxWidth: 'md',
+                                color: 'common.white',
+                                textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+                            }}
+                        >
                             Your trusted partner in agricultural management and coordination
                         </Typography>
                         <Box sx={{ display: 'flex', gap: 2 }}>
@@ -143,6 +169,14 @@ export default function Welcome() {
                                 size="large"
                                 component={Link}
                                 href="#learn-more"
+                                 sx={{
+                                        borderColor: 'white',
+                                        color: 'white',
+                                        '&:hover': {
+                                            borderColor: 'white',
+                                            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                                        }
+                                    }}
                             >
                                 Learn More
                             </Button>
@@ -151,59 +185,183 @@ export default function Welcome() {
                 </Box>
 
                 {/* Features Section */}
-                <Box sx={{ bgcolor: '#396031', py: 8 }}> {/* Light green background */}
-                    <Container maxWidth="lg">
-                        <Typography variant="h3" component="h2" sx={{ textAlign: 'center', mb: 6 }}>
+                <Box sx={{ 
+                    bgcolor: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(10px)',
+                    py: 12,
+                    borderRadius: '16px',
+                    mx: 2,
+                    mt: 4,
+                    boxShadow: 3,
+                    border: '1px solid',
+                    borderColor: 'divider'
+                }}>
+                    <Container maxWidth="lg" >
+                        <Typography 
+                            variant="h3" 
+                            component="h2" 
+                            sx={{ 
+                                textAlign: 'center', 
+                                mb: 8,
+                                color: 'common.white',
+                                fontWeight: 'bold',
+                                textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                            }}
+                        >
                             Why Choose AgriCord?
-                    </Typography>
-                    <Box sx={{ 
-                        display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            md: 'repeat(3, 1fr)'
-                        },
-                        gap: 4
-                    }}>
-                        {/* Feature 1 */}
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ color: 'primary.main', fontSize: 48, mb: 2 }}>🌱</Box>
-                            <Typography variant="h5" component="h3" sx={{ mb: 2 }}>
-                                Smart Farming
-                            </Typography>
-                            <Typography color="text.secondary">
-                                Leverage data-driven insights to optimize your agricultural operations
-                            </Typography>
-                        </Box>
+                        </Typography>
+                        <Box sx={{ 
+                            display: 'grid',
+                            gridTemplateColumns: {
+                                xs: '1fr',
+                                md: 'repeat(3, 1fr)'
+                            },
+                            gap: 6,
+                        }}>
+                            {/* Feature 1 */}
+                            <Box sx={{ 
+                                textAlign: 'center',
+                                p: 4,
+                                borderRadius: 2,
+                                bgcolor: 'rgba(255, 255, 255, 0.05)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid',
+                                borderColor: 'divider',
+                                transition: 'all 0.3s ease-in-out',
+                                '&:hover': {
+                                    transform: 'translateY(-8px)',
+                                    boxShadow: '0 8px 32px rgba(255, 255, 255, 0.1)',
+                                    bgcolor: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }}>
+                                <Box sx={{ fontSize: 56, mb: 3 }}>🌱</Box>
+                                <Typography 
+                                    variant="h5" 
+                                    component="h3" 
+                                    sx={{ 
+                                        mb: 2, 
+                                        color: 'common.white', 
+                                        fontWeight: 'medium'
+                                    }}
+                                >
+                                    Smart Farming
+                                </Typography>
+                                <Typography 
+                                    variant="body1" 
+                                    sx={{ 
+                                        color: 'grey.300',
+                                        fontSize: '1.1rem',
+                                        lineHeight: 1.6
+                                    }}
+                                >
+                                    Leverage data-driven insights to optimize your agricultural operations
+                                </Typography>
+                            </Box>
 
-                        {/* Feature 2 */}
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ color: 'primary.main', fontSize: 48, mb: 2 }}>📊</Box>
-                            <Typography variant="h5" component="h3" sx={{ mb: 2 }}>
-                                Real-time Monitoring
-                            </Typography>
-                            <Typography color="text.secondary">
-                                Track your farm's performance with advanced analytics and reporting
-                            </Typography>
-                        </Box>
+                            {/* Feature 2 */}
+                            <Box sx={{ 
+                                textAlign: 'center',
+                                p: 4,
+                                borderRadius: 2,
+                                bgcolor: 'rgba(255, 255, 255, 0.05)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid',
+                                borderColor: 'divider',
+                                transition: 'all 0.3s ease-in-out',
+                                '&:hover': {
+                                    transform: 'translateY(-8px)',
+                                    boxShadow: '0 8px 32px rgba(255, 255, 255, 0.1)',
+                                    bgcolor: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }}>
+                                <Box sx={{ fontSize: 56, mb: 3 }}>📊</Box>
+                                <Typography 
+                                    variant="h5" 
+                                    component="h3" 
+                                    sx={{ 
+                                        mb: 2, 
+                                        color: 'common.white', 
+                                        fontWeight: 'medium'
+                                    }}
+                                >
+                                    Real-time Monitoring
+                                </Typography>
+                                <Typography 
+                                    variant="body1" 
+                                    sx={{ 
+                                        color: 'grey.300',
+                                        fontSize: '1.1rem',
+                                        lineHeight: 1.6
+                                    }}
+                                >
+                                    Track your farm's performance with advanced analytics and reporting
+                                </Typography>
+                            </Box>
 
-                        {/* Feature 3 */}
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ color: 'primary.main', fontSize: 48, mb: 2 }}>🤝</Box>
-                            <Typography variant="h5" component="h3" sx={{ mb: 2 }}>
-                                Resource Management
-                            </Typography>
-                            <Typography color="text.secondary">
-                                Efficiently manage your agricultural resources and workforce
-                            </Typography>
-                        </Box>
+                            {/* Feature 3 */}
+                            <Box sx={{ 
+                                textAlign: 'center',
+                                p: 4,
+                                borderRadius: 2,
+                                bgcolor: 'rgba(255, 255, 255, 0.05)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid',
+                                borderColor: 'divider',
+                                transition: 'all 0.3s ease-in-out',
+                                '&:hover': {
+                                    transform: 'translateY(-8px)',
+                                    boxShadow: '0 8px 32px rgba(255, 255, 255, 0.1)',
+                                    bgcolor: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }}>
+                                <Box sx={{ fontSize: 56, mb: 3 }}>🤝</Box>
+                                <Typography 
+                                    variant="h5" 
+                                    component="h3" 
+                                    sx={{ 
+                                        mb: 2, 
+                                        color: 'common.white', 
+                                        fontWeight: 'medium'
+                                    }}
+                                >
+                                    Resource Management
+                                </Typography>
+                                <Typography 
+                                    variant="body1" 
+                                    sx={{ 
+                                        color: 'grey.300',
+                                        fontSize: '1.1rem',
+                                        lineHeight: 1.6
+                                    }}
+                                >
+                                    Efficiently manage your agricultural resources and workforce
+                                </Typography>
+                            </Box>
                     </Box>
                     </Container>
                 </Box>
 
                 {/* Footer */}
-                <Box component="footer" sx={{ bgcolor: 'background.paper', py: 4, mt: 'auto' }}>
+                <Box 
+                    component="footer" 
+                    sx={{ 
+                        bgcolor: 'rgba(255, 255, 255, 0.02)',
+                        py: 6,
+                        mt: 8,
+                        borderTop: 1,
+                        borderColor: 'rgba(255, 255, 255, 0.1)'
+                    }}
+                >
                     <Container maxWidth="lg">
-                        <Typography variant="body2" color="text.secondary" align="center">
+                        <Typography 
+                            variant="body2" 
+                            align="center"
+                            sx={{
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                fontSize: '0.9rem',
+                                letterSpacing: '0.5px'
+                            }}
+                        >
                             © 2025 AgriCord. All rights reserved.
                         </Typography>
                     </Container>

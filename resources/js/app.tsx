@@ -7,7 +7,7 @@ import { initializeTheme } from './hooks/use-appearance';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { StyledEngineProvider } from '@mui/material/styles';
-import theme from './theme/Theme';
+import { theme } from './theme/theme';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

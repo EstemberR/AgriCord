@@ -66,29 +66,39 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
     'Cassava',
   ];
 
-  // Common TextField styling with blue border and placeholder
+  // Common TextField styling with elegant dark theme
   const textFieldStyle = {
     '& .MuiInputLabel-root': {
-      color: '#334155',
-      fontWeight: 600,
-    },
-    '& .MuiInputBase-input': {
-      color: '#0f172a',
+      color: 'rgba(255,255,255,0.7)',
       fontWeight: 500,
     },
+    '& .MuiInputBase-input': {
+      color: 'white',
+      fontWeight: 400,
+    },
     '& .MuiOutlinedInput-root': {
+      backgroundColor: 'rgba(255,255,255,0.05)',
+      transition: 'all 0.2s ease',
       '& fieldset': {
-        borderColor: '#1e40af', // Blue border
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: '1px',
+      },
+      '&:hover': {
+        backgroundColor: 'rgba(255,255,255,0.08)',
       },
       '&:hover fieldset': {
-        borderColor: '#1e40af', // Blue on hover
+        borderColor: 'rgba(255,255,255,0.2)',
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#1e40af', // Blue when focused
+      '&.Mui-focused': {
+        backgroundColor: 'rgba(255,255,255,0.1)',
+        '& fieldset': {
+          borderColor: 'rgba(255,255,255,0.3)',
+          borderWidth: '1px',
+        },
       },
     },
     '& .MuiInputBase-input::placeholder': {
-      color: '#64748b',
+      color: 'rgba(255,255,255,0.5)',
       opacity: 1,
     },
   };
@@ -137,52 +147,82 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
         fullWidth
         PaperProps={{
           sx: {
-            borderRadius: 3,
+            borderRadius: 2,
             maxHeight: '90vh',
+            background: '#1e293b',
           },
         }}
       >
         <DialogTitle
           sx={{
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
+            background: 'transparent',
             color: 'white',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            fontWeight: 'bold',
+            py: 3,
+            px: 3,
+            borderBottom: '1px solid rgba(255,255,255,0.1)',
           }}
         >
-          <Typography variant="h6" component="span">
-            🌾 Add New Farmer
-          </Typography>
-          <IconButton onClick={handleClose} sx={{ color: 'white' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Box sx={{ 
+              bgcolor: 'rgba(255,255,255,0.1)',
+              borderRadius: 1.5,
+              p: 1,
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+              <Typography sx={{ fontSize: '1.5rem' }}>🌾</Typography>
+            </Box>
+            <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1.25rem' }}>
+              Add New Farmer
+            </Typography>
+          </Box>
+          <IconButton 
+            onClick={handleClose} 
+            sx={{ 
+              color: 'white',
+              '&:hover': { 
+                bgcolor: 'rgba(255,255,255,0.1)',
+                transform: 'rotate(90deg)',
+                transition: 'all 0.2s ease-in-out',
+              },
+            }}
+          >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
 
         <form onSubmit={handleSubmit}>
-          <DialogContent dividers sx={{ p: 3 }}>
-            <Stack spacing={2}>
+          <DialogContent sx={{ p: 3, background: '#1e293b' }}>
+            <Stack spacing={2.5}>
               {/* Personal Information */}
               <Card
                 sx={{
-                  background: '#ffffff',
-                  border: '2px solid #e2e8f0',
+                  background: 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(10px)',
                   borderRadius: 2,
-                  boxShadow: 2,
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    background: 'rgba(255,255,255,0.08)',
+                  },
                 }}
               >
                 <CardHeader
-                  title="👤 Personal Information"
-                  sx={{
-                    background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
-                    color: 'white',
-                    py: 1.5,
-                    '& .MuiCardHeader-title': {
+                  title={
+                    <Typography sx={{ 
                       fontSize: '1rem',
-                      fontWeight: '700',
+                      fontWeight: 700,
                       color: 'white',
-                    },
+                      ml: 1
+                    }}>
+                      Personal Information
+                    </Typography>
+                  }
+                  sx={{
+                    py: 2,
                   }}
                 />
                 <CardContent sx={{ p: 2 }}>
@@ -362,23 +402,29 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
               {/* Identification */}
               <Card
                 sx={{
-                  background: '#ffffff',
-                  border: '2px solid #fbbf24',
+                  background: 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(10px)',
                   borderRadius: 2,
-                  boxShadow: 2,
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    background: 'rgba(255,255,255,0.08)',
+                  },
                 }}
               >
                 <CardHeader
-                  title="🆔 Identification"
-                  sx={{
-                    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-                    color: 'white',
-                    py: 1.5,
-                    '& .MuiCardHeader-title': {
+                  title={
+                    <Typography sx={{ 
                       fontSize: '1rem',
-                      fontWeight: '700',
+                      fontWeight: 700,
                       color: 'white',
-                    },
+                      ml: 1
+                    }}>
+                      Identification
+                    </Typography>
+                  }
+                  sx={{
+                    py: 2,
                   }}
                 />
                 <CardContent sx={{ p: 2 }}>
@@ -414,13 +460,26 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
                       variant="contained"
                       sx={{
                         alignSelf: 'flex-start',
-                        background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                        bgcolor: 'rgba(255,255,255,0.1)',
+                        color: 'white',
+                        display: 'flex',
+                        gap: 1,
+                        px: 2,
+                        py: 1,
                         '&:hover': {
-                          background: 'linear-gradient(135deg, #d97706 0%, #b45309 100%)',
+                          bgcolor: 'rgba(255,255,255,0.2)',
                         },
+                        transition: 'all 0.2s ease',
                       }}
                     >
-                      📷 Upload Photo
+                      <Box sx={{ 
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1
+                      }}>
+                        <Typography sx={{ fontSize: '1.2rem' }}>📷</Typography>
+                        <span>Upload Photo</span>
+                      </Box>
                       <input
                         hidden
                         accept="image/*"
@@ -440,23 +499,29 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
               {/* Farm Information */}
               <Card
                 sx={{
-                  background: '#ffffff',
-                  border: '2px solid #60a5fa',
+                  background: 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(10px)',
                   borderRadius: 2,
-                  boxShadow: 2,
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    background: 'rgba(255,255,255,0.08)',
+                  },
                 }}
               >
                 <CardHeader
-                  title="🚜 Farm Information"
-                  sx={{
-                    background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
-                    color: 'white',
-                    py: 1.5,
-                    '& .MuiCardHeader-title': {
+                  title={
+                    <Typography sx={{ 
                       fontSize: '1rem',
-                      fontWeight: '700',
+                      fontWeight: 700,
                       color: 'white',
-                    },
+                      ml: 1
+                    }}>
+                      Farm Information
+                    </Typography>
+                  }
+                  sx={{
+                    py: 2,
                   }}
                 />
                 <CardContent sx={{ p: 2 }}>
@@ -564,23 +629,29 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
               {/* Emergency Contact */}
               <Card
                 sx={{
-                  background: '#ffffff',
-                  border: '2px solid #f87171',
+                  background: 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(10px)',
                   borderRadius: 2,
-                  boxShadow: 2,
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    background: 'rgba(255,255,255,0.08)',
+                  },
                 }}
               >
                 <CardHeader
-                  title="🚨 Emergency Contact"
-                  sx={{
-                    background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-                    color: 'white',
-                    py: 1.5,
-                    '& .MuiCardHeader-title': {
+                  title={
+                    <Typography sx={{ 
                       fontSize: '1rem',
-                      fontWeight: '700',
+                      fontWeight: 700,
                       color: 'white',
-                    },
+                      ml: 1
+                    }}>
+                      Emergency Contact
+                    </Typography>
+                  }
+                  sx={{
+                    py: 2,
                   }}
                 />
                 <CardContent sx={{ p: 2 }}>
@@ -617,15 +688,23 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
             </Stack>
           </DialogContent>
 
-          <DialogActions sx={{ p: 2, gap: 1 }}>
+          <DialogActions 
+            sx={{ 
+              p: 3, 
+              gap: 2,
+              background: '#1e293b',
+              borderTop: '1px solid rgba(255,255,255,0.1)'
+            }}
+          >
             <Button 
               onClick={handleClose} 
               disabled={processing}
               sx={{ 
-                color: '#64748b', 
+                color: 'rgba(255,255,255,0.7)', 
                 fontWeight: 600,
+                px: 3,
                 '&:hover': {
-                  backgroundColor: 'rgba(100, 116, 139, 0.08)',
+                  backgroundColor: 'rgba(255,255,255,0.05)',
                 },
               }}
             >
@@ -636,14 +715,23 @@ export default function AddFarmerModal({ open, onClose }: AddFarmerModalProps) {
               variant="contained"
               disabled={processing}
               sx={{
-                background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
-                fontWeight: 700,
+                bgcolor: 'rgba(255,255,255,0.1)',
+                color: 'white',
+                fontWeight: 600,
+                px: 4,
                 '&:hover': {
-                  background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)',
+                  bgcolor: 'rgba(255,255,255,0.2)',
                 },
+                '&:active': {
+                  bgcolor: 'rgba(255,255,255,0.3)',
+                },
+                transition: 'all 0.2s ease',
               }}
             >
-              🌾 Save Farmer
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography sx={{ fontSize: '1.2rem' }}>🌾</Typography>
+                <span>Save Farmer</span>
+              </Box>
             </Button>
           </DialogActions>
         </form>
