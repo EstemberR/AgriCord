@@ -193,7 +193,8 @@ export default function Dashboard({ dashboardData }: DashboardProps) {
                       <Tooltip contentStyle={{ backgroundColor: '#ffffff',border: 'none',
                           borderRadius: '8px',
                           padding: '8px 12px',
-                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'}} />
+                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'}}
+                       />
                     </PieChart>
                   </ResponsiveContainer>
                 </Box>
